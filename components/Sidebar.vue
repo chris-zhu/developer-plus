@@ -1,96 +1,101 @@
 <script setup lang="ts">
-const coreMembers = await $fetch('/api/core-members')
-const friendLink = await $fetch('/api/friend-link')
+// const coreMembers = await $fetch('/api/core-members')
+// const friendLink = await $fetch('/api/friend-link')
+
+const [{ data: coreMembers }, { data: friendLink }] = await Promise.all([useFetch('/api/core-members'), useFetch('/api/friend-link')])
+// const [{ data: coresRef }, { data: friendsRef }] = await Promise.all([useFetch('/api/core-members'), useFetch('/api/friend-link')])
 </script>
 
 <template>
-  <div class="px-32px py-24px w-380px min-h-screen border-l border-gray-200 dark:border-gray-200/20">
-    <div class="flex justify-between">
-      <h2 class="text-2xl">
+  <div px8 py6 w95 min-h-screen b="l l-gray2 dark:l-gray2/20">
+    <div flex justify-between>
+      <h2 text-2xl>
         developer-plus
       </h2>
-      <div class="flex items-center text-lg">
-        <a class="icon-primary i-carbon-logo-github mr-8px" href="https://github.com/developer-plus" target="_blank" />
+      <div flex items-center text-lg>
+        <a icon-primary i-carbon-logo-github mr2 href="https://github.com/developer-plus" target="_blank" />
         <dark-toggle />
       </div>
     </div>
 
-    <div class="mt-16px opacity-70">
+    <div mt4 op70>
       来源于开发者，服务于开发者。
     </div>
 
-    <div class="mt-36px">
-      <h3 class="text-xl">
+    <div mt9>
+      <h3 text-xl>
         核心成员
       </h3>
 
-      <div class="flex justify-between flex-wrap mt-16px">
+      <div grid="~ cols-5 gap-4" mt2>
         <a v-for="(member, index) in coreMembers" :key="index" :href="member.link" :title="member.name">
-          <div class="overflow-hidden mt-8px w-56px h-56px cursor-pointer border-rounded-28px bg-black">
-            <img class="w-full h-full" :src="member.avatar" :alt="member.name">
-          </div>
+          <img class="aspect-1/1" cursor-pointer rounded-full :src="member.avatar" :alt="member.name">
         </a>
       </div>
     </div>
 
-    <div class="mt-36px">
-      <h3 class="text-xl">
+    <div mt9>
+      <h3 text-xl>
         加入我们
       </h3>
 
-      <div class="mt-16px opacity-70">
+      <div mt4 op70>
         添加微信号 `Hongbusi16530`，了解更多。
       </div>
     </div>
 
-    <div class="mt-36px">
-      <h3 class="text-xl">
+    <div mt9>
+      <h3 text-xl>
         快速入口
       </h3>
 
-      <div class="flex justify-between flex-wrap mt-16px">
-        <a class="btn-primary mt-8px" href="https://github.com/developer-plus/weekly/issues/new/choose" target="_blank">
+      <div flex justify-between mt6>
+        <a btn-primary href="https://github.com/developer-plus/weekly/issues/new/choose" target="_blank">
           周刊投稿
         </a>
-        <a class="btn-primary mt-8px" href="https://github.com/developer-plus/plans/issues/new?assignees=&labels=pr+welcome&template=create.yml&title=%E3%80%90TODO%E3%80%91" target="_blank">
+        <a
+          btn-primary
+          href="https://github.com/developer-plus/plans/issues/new?assignees=&labels=pr+welcome&template=create.yml&title=%E3%80%90TODO%E3%80%91"
+          target="_blank"
+        >
           新增计划
         </a>
-        <a class="btn-primary mt-8px" href="https://github.com/developer-plus/developer-plus/issues" target="_blank">
+        <a btn-primary href="https://github.com/developer-plus/developer-plus/issues" target="_blank">
           勘误/建议
         </a>
       </div>
     </div>
 
-    <div class="mt-36px">
-      <h3 class="text-xl">
+    <div mt9>
+      <h3 text-xl>
         每日一题
       </h3>
 
-      <div class="mt-16px opacity-70">
+      <div mt4 op70>
         手写题：如何实现防抖节流？
       </div>
 
-      <a class="btn-primary-small mt-16px" href="https://github.com/developer-plus/interview/issues/5" target="_blank">
+      <a btn-primary-small mt4 href="https://github.com/developer-plus/interview/issues/5" target="_blank">
         前往答题
       </a>
     </div>
 
-    <div class="mt-36px">
-      <h3 class="text-xl">
+    <div mt9>
+      <h3 text-xl>
         友情链接
       </h3>
 
-      <div class="mt-16px">
-        <a v-for="(item, index) in friendLink" :key="index" :href="item.link" target="_blank">
-          <div class="px-8px py-8px mt-8px bg-primary">
-            <h2>{{ item.title }}</h2>
-            <p class="opacity-70">{{ item.description }}</p>
+      <div mt9>
+        <a v-for="item in friendLink" :key="item.link" :href="item.link" target="_blank">
+          <div p2 mt2 bg-primary>
+            <h2 text-lg>{{ item.title }}</h2>
+            <p op-70>{{ item.description }}</p>
           </div>
         </a>
       </div>
     </div>
 
-    <footer class="mt-42px text-sm opacity-70">
+    <footer text-sm mt10 op70>
       Copyright © 2022 developer-plus, made with 💗.
     </footer>
   </div>

@@ -30,18 +30,19 @@ function handleClick(githubName) {
 <template>
   <page-wrapper v-bind="options">
     <page-module title="核心成员">
-      <div class="flex flex-wrap justify-between">
+      <div grid="~ cols-2 gap-4">
         <div
           v-for="(member, index) in members" :key="index"
-          class="flex justify-between px-24px py-16px mt-16px w-340px bg-primary"
+          p="x6 y4"
+          flex justify-center bg-primary
         >
-          <div class="overflow-hidden mr-24px w-64px h-64px border-rounded-1/2">
-            <img :src="member.avatar ?? `${member.githubLink}.png`">
+          <div flex="[0_0_64px]" mr6>
+            <img w-full rounded-full aspect="ratio-1/1" :src="member.avatar ?? `${member.githubLink}.png`">
           </div>
-          <div class="flex-1">
+          <div flex-1>
             <p>
               {{ member.name }}
-              <span class="opacity-70 text-sm">（{{ member.tag }}）</span>
+              <span text-sm op70>（{{ member.tag }}）</span>
             </p>
             <p class="flex items-center mt-4px opacity-70 text-sm">
               <i class="mr-8px icon-primary i-carbon-location" />
